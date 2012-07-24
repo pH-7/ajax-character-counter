@@ -1,10 +1,13 @@
 <?php
+if(!function_exists('mb_strlen'))
+    exit('Please install the "mbstring" PHP module.');
+
 require 'inc/functions.php';
 
 $sText = (isset($_POST['characters'])) ? $_POST['characters'] : '';
 
-$sTxt = strlen($sText);
-$sTxtWithoutSpaces =  strlen(strip_spaces($sText));
+$sTxt = mb_strlen($sText, ENCODING);
+$sTxtWithoutSpaces =  mb_strlen(strip_spaces($sText), ENCODING);
 $sSpaces = ($sTxt-$sTxtWithoutSpaces);
 $sWord = str_word_count($sText);
 $sSentence = sentenceCount($sText);
