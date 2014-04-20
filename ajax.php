@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
+ * @license          GNU General Public License <http://www.gnu.org/licenses/gpl.html>
+ */
+
 if(!function_exists('mb_strlen'))
     exit('Please install the "mbstring" PHP module.');
 
