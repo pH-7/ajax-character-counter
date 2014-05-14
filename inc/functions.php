@@ -5,22 +5,57 @@
  * @license          GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  */
 
-define('ENCODING', 'utf-8');
+define('PH7_ENCODING', 'utf-8');
 
+
+/**
+ * Remove spaces in text.
+ *
+ * @param string $sText
+ * @return integer
+ */
 function strip_spaces($sText)
 {
     return str_replace(array("\r\n","\r","\s","\t","\n","\s\r\n\t",' ','  ','   ','    ','     ','      '), '', $sText);
 }
 
-function sentenceCount($sText)
+/**
+ * Count the number of sentences.
+ *
+ * @param string $sText
+ * @return integer
+ */
+function sentence_count($sText)
 {
     return preg_match_all('/(?:[\w,]+[\s]?)(\.|\!|\?)(?!\w)/', $sText, $aMatch);
 }
 
-function t($sToken, $sArg0 = '', $sArg1 = '', $sArg2 = '', $sArg3 = '', $sArg4 = '')
+/**
+ * Calculate the reading time of text.
+ *
+ * @param string $sText
+ * @param string $iWordPerMin Word per minute. Default: 190
+ * @return array ['min' => INTEGER, 'sec' => INTEGER]
+ */
+function reading_time($sText, $iWordPerMin = 190)
+{
+    $sText = str_word_count(strip_tags($sText));
+    $iMin = floor($sText / $iWordPerMin);
+    $iSec = floor($sText % $iWordPerMin / ($iWordPerMin / 60));
+    return array('min' => $iMin, 'sec' => $iSec);
+}
+
+/**
+ * Language helper function.
+ *
+ * @param string $sVar [, string $... ]
+ * @return string
+ */
+function t()
 {
     //$sToken = gettext($sToken); // We don't yet have the translation mode
-    $aSearch = array('%0%', '%1%', '%2%', '%3%', '%4%');
-    $aReplace = array($sArg0, $sArg1, $sArg2, $sArg3, $sArg4);
-    return str_replace($aSearch, $aReplace, $sToken);
+    $sToken = func_get_arg(0);
+    for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
+        $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
+    return $sToken;
 }

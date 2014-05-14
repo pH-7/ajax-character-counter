@@ -12,11 +12,12 @@ require 'inc/functions.php';
 
 $sText = (isset($_POST['characters'])) ? $_POST['characters'] : '';
 
-$sTxt = mb_strlen($sText, ENCODING);
-$sTxtWithoutSpaces =  mb_strlen(strip_spaces($sText), ENCODING);
-$sSpaces = ($sTxt-$sTxtWithoutSpaces);
-$sWord = str_word_count($sText);
-$sSentence = sentenceCount($sText);
+$iText = mb_strlen($sText, PH7_ENCODING);
+$iTextWithoutSpace =  mb_strlen(strip_spaces($sText), PH7_ENCODING);
+$iSpace = ($iText-$iTextWithoutSpace);
+$iWord = str_word_count($sText);
+$iSentence = sentence_count($sText);
+$aReadingTime = reading_time($sText);
 
 echo t('<ul>
 <li>Votre texte comporte :</li>
@@ -25,4 +26,5 @@ echo t('<ul>
 <li>%2% <em>espaces</em>.</li>
 <li>%3% <em>mots</em>.</li>
 <li>%4% <em>phrases</em>.</li>
-</ul>', $sTxt, $sTxtWithoutSpaces, $sSpaces, $sWord, $sSentence);
+<li>%5% min, %6% sec de <em>temps de lecture</em>.</li>
+</ul>', $iText, $iTextWithoutSpace, $iSpace, $iWord, $iSentence, $aReadingTime['min'], $aReadingTime['sec']);

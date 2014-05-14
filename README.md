@@ -2,7 +2,8 @@
 
 ## Description
 
-**PHP Character Counter Online Tool** is a PHP script tool allows visitors to compters letters/characters, words, sentences/phrases, spaces, etc. in live.
+**PHP Character Counter Online Tool** is a PHP script tool allows visitors to count letters/characters, words, sentences/phrases, spaces, etc. in live.
+It even allows to **analyze the text** and calculate the **reading time in real-time**.
 
 
 ## Author
