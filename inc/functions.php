@@ -53,8 +53,8 @@ function reading_time($sText, $iWordPerMin = 190)
  */
 function t()
 {
-    //$sToken = gettext($sToken); // We don't yet have the translation mode
     $sToken = func_get_arg(0);
+    //$sToken = gettext($sToken); // We don't yet have the translation mode
     for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
         $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
     return $sToken;
